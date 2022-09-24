@@ -1,0 +1,3 @@
+[console_scripts]
+computer_vision = computer_vision.computer_vision:main
+

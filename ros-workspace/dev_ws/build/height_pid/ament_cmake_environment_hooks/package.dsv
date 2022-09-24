@@ -1,0 +1,4 @@
+source;share/height_pid/local_setup.bash
+source;share/height_pid/local_setup.dsv
+source;share/height_pid/local_setup.sh
+source;share/height_pid/local_setup.zsh
