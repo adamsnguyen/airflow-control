@@ -1,0 +1,16 @@
+/workspace/dev_ws/install/modbus_rtu/lib/modbus_rtu/modbus_rtu
+/workspace/dev_ws/install/modbus_rtu/share/ament_index/resource_index/package_run_dependencies/modbus_rtu
+/workspace/dev_ws/install/modbus_rtu/share/ament_index/resource_index/parent_prefix_path/modbus_rtu
+/workspace/dev_ws/install/modbus_rtu/share/modbus_rtu/environment/ament_prefix_path.sh
+/workspace/dev_ws/install/modbus_rtu/share/modbus_rtu/environment/ament_prefix_path.dsv
+/workspace/dev_ws/install/modbus_rtu/share/modbus_rtu/environment/path.sh
+/workspace/dev_ws/install/modbus_rtu/share/modbus_rtu/environment/path.dsv
+/workspace/dev_ws/install/modbus_rtu/share/modbus_rtu/local_setup.bash
+/workspace/dev_ws/install/modbus_rtu/share/modbus_rtu/local_setup.sh
+/workspace/dev_ws/install/modbus_rtu/share/modbus_rtu/local_setup.zsh
+/workspace/dev_ws/install/modbus_rtu/share/modbus_rtu/local_setup.dsv
+/workspace/dev_ws/install/modbus_rtu/share/modbus_rtu/package.dsv
+/workspace/dev_ws/install/modbus_rtu/share/ament_index/resource_index/packages/modbus_rtu
+/workspace/dev_ws/install/modbus_rtu/share/modbus_rtu/cmake/modbus_rtuConfig.cmake
+/workspace/dev_ws/install/modbus_rtu/share/modbus_rtu/cmake/modbus_rtuConfig-version.cmake
+/workspace/dev_ws/install/modbus_rtu/share/modbus_rtu/package.xml

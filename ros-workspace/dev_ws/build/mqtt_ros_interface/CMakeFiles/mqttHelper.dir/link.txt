@@ -1,0 +1,2 @@
+/usr/bin/ar qc libmqttHelper.a CMakeFiles/mqttHelper.dir/src/mqtt_helper.cpp.o
+/usr/bin/ranlib libmqttHelper.a
