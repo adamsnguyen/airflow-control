@@ -864,9 +864,9 @@ export default {
         { text: 'Off', value: '0' },
         { text: 'On', value: '1' }
       ],
-      p_term: '0.2',
-      i_term: '0',
-      d_term: '0',
+      p_term: '0.5',
+      i_term: '0.012',
+      d_term: '250',
       height_axis_min: 0,
       height_axis_max: 600,
       rpm_axis_min: 600,
@@ -874,7 +874,7 @@ export default {
       airflow_axis_min: 0,
       airflow_axis_max: 40,
       height_setpoint: '0',
-      base_rpm: '1150',
+      base_rpm: '1200',
       mqttSystemHeightTopic: 'system_property_JSON',
       system_height_p: 0,
       system_height_i: 0,
@@ -973,8 +973,6 @@ export default {
     motorStop () {
       socket.emit('motor', '0')
       socket.emit('clear_error', '1')
-      this.pid_toggle = '0'
-      socket.emit('pid_toggle', this.pid_toggle)
     },
 
     isNumber (evt) {
@@ -990,7 +988,6 @@ export default {
 
     heightOffsetFunc () {
       socket.emit('offset', this.heightOffset)
-      socket.emit('clear_error', '1')
     },
 
     isNumberNeg (evt) {

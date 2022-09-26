@@ -216,7 +216,7 @@ class ComputerVisionPublisher(Node):
     def __init__(self):
         super().__init__('computer_vision')
         self.publisher_ = self.create_publisher(Float32, 'object_height', 10)
-        timer_period = 0.1  # seconds
+        timer_period = 0.01  # seconds
         self.timer = self.create_timer(timer_period, self.timer_callback)
         self.subscription = self.create_subscription(
             Float32,

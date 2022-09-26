@@ -14,7 +14,7 @@ using std::placeholders::_1;
 
 #define TIMER_MS 80
 #define DEBUG 0
-#define BASE 0.0f
+#define BASE 800.0f
 #define MAX_ERROR 200
 #define MAX_RPM 1500
 /*
@@ -49,9 +49,9 @@ public:
 
     // ROS Parameters list
     this->declare_parameter("setpoint", 0.0f);
-    this->declare_parameter("p", 0.2f);
-    this->declare_parameter("i", 0.0f);
-    this->declare_parameter("d", 0.0f);
+    this->declare_parameter("p", 0.5f);
+    this->declare_parameter("i", 0.012f);
+    this->declare_parameter("d", 250.0f);
     this->declare_parameter("base", BASE);
 
     // Publishers
@@ -84,9 +84,9 @@ public:
         this->create_subscription<std_msgs::msg::Float32>(
             "base_rpm", 1, std::bind(&HeightPID::base_rpm_callback, this, _1)); //depcrecated
 
-    timer_ = this->create_wall_timer(
-        std::chrono::milliseconds(TIMER_MS),
-        std::bind(&HeightPID::pid_loop_callback, this));
+    // timer_ = this->create_wall_timer(
+    //     std::chrono::milliseconds(TIMER_MS),
+    //     std::bind(&HeightPID::pid_loop_callback, this));
 
     system_property_JSON_timer_ = this->create_wall_timer(
         std::chrono::milliseconds(3000),
@@ -425,6 +425,11 @@ private:
   {
 
     this->feedback = msg->data;
+
+    if (this->controller_active)
+    {
+      this->pid_loop_callback();
+    }
 
     if (DEBUG)
     {

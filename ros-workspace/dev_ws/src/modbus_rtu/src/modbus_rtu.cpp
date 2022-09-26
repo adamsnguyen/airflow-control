@@ -14,7 +14,7 @@
 #define MAX_RPM 1800.00      // Set on VFD
 #define MAX_FREQ 600.00      // Hz * 10
 #define DEBUG 1           // Turn on for ROS logging
-#define CALLBACK_FREQ 150 // ms
+#define CALLBACK_FREQ 50 // ms
 
 using std::placeholders::_1;
 using namespace std;
