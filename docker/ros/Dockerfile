@@ -53,19 +53,6 @@ RUN ldconfig
 RUN apt install vim -y
 
 RUN apt install -y mosquitto mosquitto-clients
-# 
-# setup entrypoint
-#
-COPY ros_entrypoint.sh /ros_entrypoint.sh
-
-RUN sed -i \
-    's/ros_env_setup="\/opt\/ros\/$ROS_DISTRO\/setup.bash"/ros_env_setup="${ROS_ROOT}\/install\/setup.bash"/g' \
-    /ros_entrypoint.sh && \
-    cat /ros_entrypoint.sh
-
-RUN echo 'source ${ROS_ROOT}/install/setup.bash' >> /root/.bashrcc
-ENV ws=/workspace/dev_ws
-ENTRYPOINT ["/ros_entrypoint.sh"]
 
 COPY ZED_SDK_Tegra_L4T32.7_v3.7.5.run /ZED_SDK_Tegra_L4T32.7_v3.7.5.run
 
@@ -216,6 +203,19 @@ WORKDIR /
 RUN git clone https://github.com/stephane/libmodbus.git && \
 cd /libmodbus && ./autogen.sh && ./configure && make install
 RUN export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/usr/local/lib
+
+# setup entrypoint
+#
+COPY ros_entrypoint.sh /ros_entrypoint.sh
+
+RUN sed -i \
+    's/ros_env_setup="\/opt\/ros\/$ROS_DISTRO\/setup.bash"/ros_env_setup="${ROS_ROOT}\/install\/setup.bash"/g' \
+    /ros_entrypoint.sh && \
+    cat /ros_entrypoint.sh
+
+RUN echo 'source ${ROS_ROOT}/install/setup.bash' >> /root/.bashrcc
+ENV ws=/workspace/dev_ws
+ENTRYPOINT ["/ros_entrypoint.sh"]
 
 RUN ldconfig
 
