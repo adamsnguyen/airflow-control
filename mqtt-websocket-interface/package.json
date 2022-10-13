@@ -21,6 +21,8 @@
         "mqtt": "^2.18.8",
         "nodemon": "^1.18.9",
         "serialport": "^10.4.0",
+        "shelljs": "^0.8.5",
+        "shelljs.exec": "^1.1.8",
         "socket.io": "^2.2.0",
         "webpack": "^5.74.0"
     },

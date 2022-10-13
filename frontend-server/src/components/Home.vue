@@ -32,9 +32,9 @@
                   <div class="col-xl-8">
                     <div class="container" id="radio-button-choices">
                       <div class="row">
-                        <div class="col-sm-2 axis-select-div">
+                        <!-- <div class="col-sm-2 axis-select-div">
                           <p class="axis-select-title">Y-Axis:</p>
-                        </div>
+                        </div> -->
                         <div class="col-sm-10">
                           <b-form-radio-group
                             @change="onPrimaryChange($event)"
@@ -205,7 +205,7 @@
                       </div>
                     </form>
 
-                    <br />
+                    <hr>
                     <h4>Damper Motor Control</h4>
                     <form>
                       <div class="form-row">
@@ -398,7 +398,7 @@
                   </b-card-text>
                 </b-tab>
 
-                <b-tab title="System Characteristics">
+                <b-tab title="Parameters">
                   <b-card-text>
 
                   <hr>
@@ -415,7 +415,7 @@
                   </b-card-text>
                 </b-tab>
 
-                <b-tab title="Advanced Settings">
+                <b-tab title="Settings">
                   <b-card-text>
 
 <hr>
@@ -479,6 +479,15 @@
                     </div>
                   </b-card-text>
                 </b-tab>
+
+                <b-tab title="Shutdown">
+                  <b-card-text>
+                  <div class=" button-col">
+                    <button id="shutdown" class="button" @click="shutdown">Computer Shutdown</button>
+                  </div>
+                  </b-card-text>
+                </b-tab>
+
               </b-tabs>
             </b-card>
           </div>
@@ -543,6 +552,7 @@
   font-size: x-large;
   font-family: 'Courier New', Courier, monospace;
   padding-top: 8px;
+  margin-left: 20px;
 }
 
 .panel-heading {
@@ -564,6 +574,10 @@
 
 #stop {
   background-color: lightcoral;
+}
+
+#shutdown {
+  background-color: silver;
 }
 
 .col2 {
@@ -794,8 +808,10 @@ import 'bootstrap-vue/dist/bootstrap-vue.css'
 import 'bootstrap-vue/dist/bootstrap-vue.js'
 import { ref } from 'vue'
 
-var socket = io.connect('http://192.168.1.85:3000')
-// var socket_ = io();
+// var socket = io.connect('http://192.168.1.85:3000')
+const socket = io('http://192.168.1.85:3000', {
+    withCredentials: true
+});
 
 var magnitudeChart
 var y_axis
@@ -973,6 +989,10 @@ export default {
     motorStop () {
       socket.emit('motor', '0')
       socket.emit('clear_error', '1')
+    },
+
+    shutdown () {
+      socket.emit('shutdown', 'shutdown')
     },
 
     isNumber (evt) {
@@ -1243,6 +1263,11 @@ export default {
 
       socket.on('disconnect', () => {
         this.connStatus = 'Disconnected'
+      })
+
+      socket.on('error', message => {
+        alert(message)
+
       })
 
       socket.on(this.mqttSystemHeightTopic, message => {
