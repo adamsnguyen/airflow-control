@@ -13,6 +13,7 @@
     "license": "ISC",
     "dependencies": {
         "body-parser": "^1.18.3",
+        "child-process-promise": "^2.2.1",
         "cors": "^2.8.5",
         "ejs": "^2.6.1",
         "express": "^4.16.4",
@@ -24,6 +25,7 @@
         "shelljs": "^0.8.5",
         "shelljs.exec": "^1.1.8",
         "socket.io": "^2.2.0",
+        "sudo-js": "^1.0.2",
         "webpack": "^5.74.0"
     },
     "devDependencies": {

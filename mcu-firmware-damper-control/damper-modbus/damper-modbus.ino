@@ -8,6 +8,8 @@ const int stepsPerRevolution = 200;
 Stepper myStepper(stepsPerRevolution, 2, 3, 4, 5);
 int backLimitSwitch = 12;
 int frontLimitSwitch = 11;
+int enable_1 = 13;
+int enable_2= 14;
 
 
 
@@ -17,6 +19,10 @@ void setup()
   
   pinMode(backLimitSwitch,INPUT_PULLUP);
   pinMode(frontLimitSwitch,INPUT_PULLUP);
+  pinMode(enable_1,OUTPUT);
+  pinMode(enable_2,OUTPUT);
+  
+  
   myStepper.setSpeed(20);
   Serial.begin(9800);
 }
@@ -35,6 +41,8 @@ void loop()
   int coarse = 50;
   int stepDirection = 0; //-1 is back, 1 is forward
   int active = false;
+  digitalWrite(enable_1, LOW);
+  digitalWrite(enable_2, LOW); 
 
 //  char message[100];
 //  sprintf(message, "p9: %d, p10: %d, p11: %d, p12: %d, p15: %d", digitalRead(9) , digitalRead(10), digitalRead(11), digitalRead(12), digitalRead(15));  
@@ -98,6 +106,8 @@ void loop()
           Serial.println("limit reached");
         }
         
+        digitalWrite(enable_1, HIGH);
+        digitalWrite(enable_2, HIGH);
         myStepper.step(1*stepDirection);
         stepped++;
       }

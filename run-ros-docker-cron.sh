@@ -1,11 +1,7 @@
 #!/bin/bash
 
-sleep 5
-
 # give docker root user X11 permissions
 xhost +si:localuser:root
-
-udevadmn trigger
 
 docker kill ros_jetson
 
@@ -19,7 +15,7 @@ docker run --runtime nvidia --rm --network host -e DISPLAY=$DISPLAY \
     --device=/dev/ttyUSB1 \
     --device=$(readlink -f /dev/RS485) \
     -e RS485=$(readlink -f /dev/RS485) \
-    --mount type=bind,source=/home/ubc/workspace/airflow-control/ros-workspace,target=/workspace \
+    --mount type=bind,source=/mnt/usb-drive/workspace/airflow-control/ros-workspace,target=/workspace \
     -w /workspace/dev_ws \
     --name ros_jetson \
     jetson_ros2_foxy 

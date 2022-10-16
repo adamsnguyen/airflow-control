@@ -21,12 +21,18 @@ const express = require('express'),
         }
     });
 
+const { exec } = require('child_process');
+// var sudo = require('sudo-js');
+// sudo.setPassword('admin');
+
+// var command = ['shutdown', '-h', 'now']
+
 debug = 1;
 debug_front = 1;
 // server.listen(3000);
 
 const kill = require('kill-port');
-var exec = require('shelljs.exec');
+// var exec = require('shelljs.exec');
 const { SerialPort } = require('serialport')
 const { ReadlineParser } = require('@serialport/parser-readline')
 var port;
@@ -57,7 +63,7 @@ try {
     }
 }
 catch (err) {
-    console.log(err.message);
+    console.log(err.message + "\n Error Connecting to the Arduino/Damper Module");
     io.emit("error", err.message)
 }
 
@@ -283,7 +289,46 @@ io.on('connection', function (socket) {
     });
 
     socket.on('shutdown', function (data) {
-        var shutdown = exec('shutdown -h now', { silent: true })
+        
+        // var shutdown = exec('/bin/sh -c \"shutdown -h now\"', { silent: true });
+        exec('sudo shutdown -h now', (error, stdout, stderr) => {
+
+            if (error) {
+                console.error(`error: ${error.message}`);
+                return;
+            }
+
+            if (stderr) {
+                console.error(`stderr: ${stderr}`);
+                return;
+            }
+
+            console.log(`stdout:\n${stdout}`)
+
+        });
+
+        // sudo.exec(command, function(err,pid,result) { console.log(result)});
+
+    });
+
+    socket.on('reboot', function (data) {
+
+        exec('sudo reboot', (error, stdout, stderr) => {
+
+            if (error) {
+                console.error(`error: ${error.message}`);
+                return;
+            }
+
+            if (stderr) {
+                console.error(`stderr: ${stderr}`);
+                return;
+            }
+
+            console.log(`stdout:\n${stdout}`)
+
+        });
+
     });
 
 });

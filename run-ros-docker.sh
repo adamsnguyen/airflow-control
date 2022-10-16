@@ -1,5 +1,7 @@
 #!/bin/bash
 
+sleep 10 
+
 # give docker root user X11 permissions
 xhost +si:localuser:root
 

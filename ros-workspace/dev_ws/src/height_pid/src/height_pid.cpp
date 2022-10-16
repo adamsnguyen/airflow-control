@@ -14,9 +14,14 @@ using std::placeholders::_1;
 
 #define TIMER_MS 80
 #define DEBUG 0
-#define BASE 800.0f
+#define BASE 1200.0f
 #define MAX_ERROR 200
 #define MAX_RPM 1500
+
+#define P_GAIN 0.3f
+#define I_GAIN 0.006f
+#define D_GAIN 170.0f
+
 /*
 //Deprecated
 #define DEQUE_MAX_SIZE 100
@@ -49,9 +54,9 @@ public:
 
     // ROS Parameters list
     this->declare_parameter("setpoint", 0.0f);
-    this->declare_parameter("p", 0.5f);
-    this->declare_parameter("i", 0.012f);
-    this->declare_parameter("d", 250.0f);
+    this->declare_parameter("p", P_GAIN);
+    this->declare_parameter("i",I_GAIN);
+    this->declare_parameter("d", D_GAIN);
     this->declare_parameter("base", BASE);
 
     // Publishers
@@ -105,7 +110,7 @@ public:
   float d_term;
   bool controller_active = false;
   float setpoint;
-  int base; //depcrecated
+  int base;
   int feedback; 
   deque<float> error_container; //depcrecated
   array<float, 2> derivative_error_container{0.0f, 0.0f};
@@ -289,8 +294,8 @@ private:
     float r = this->setpoint;
     float e = r - y;
     float integrator_error = e;
-    //This is deprecated
 
+    //This is deprecated
     /*
     // Self correcting to find base effort (effort to maintain height)
     if (abs(e) > this->overbase_error)

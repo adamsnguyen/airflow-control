@@ -485,6 +485,9 @@
                   <div class=" button-col">
                     <button id="shutdown" class="button" @click="shutdown">Computer Shutdown</button>
                   </div>
+                  <div class=" button-col">
+                    <button id="reboot" class="button" @click="reboot">Computer Reboot</button>
+                  </div>
                   </b-card-text>
                 </b-tab>
 
@@ -578,6 +581,10 @@
 
 #shutdown {
   background-color: silver;
+}
+
+#reboot {
+  background-color: aqua;
 }
 
 .col2 {
@@ -993,6 +1000,10 @@ export default {
 
     shutdown () {
       socket.emit('shutdown', 'shutdown')
+    },
+
+    reboot () {
+      socket.emit('reboot', 'reboot')
     },
 
     isNumber (evt) {
